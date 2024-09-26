@@ -1,0 +1,75 @@
+version: '3'
+services:
+  master:
+    image: ubuntu:24.04  # Cambia l'immagine a Ubuntu 24.04
+    container_name: master_cluster
+    tty: true
+    networks:
+      cluster_net:
+        ipv4_address: 192.168.100.10
+    volumes:
+      - ./data/master:/data
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "2222:22"  # Esponi solo la porta del master per SSH
+
+  worker1:
+    image: ubuntu:24.04  # Cambia l'immagine a Ubuntu 24.04
+    container_name: worker1
+    tty: true
+    networks:
+      cluster_net:
+        ipv4_address: 192.168.100.11
+    volumes:
+      - ./data/worker1:/data
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+  worker2:
+    image: ubuntu:24.04  # Cambia l'immagine a Ubuntu 24.04
+    container_name: worker2
+    tty: true
+    networks:
+      cluster_net:
+        ipv4_address: 192.168.100.12
+    volumes:
+      - ./data/worker2:/data
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+  worker3:
+    image: ubuntu:24.04  # Cambia l'immagine a Ubuntu 24.04
+    container_name: worker3
+    tty: true
+    networks:
+      cluster_net:
+        ipv4_address: 192.168.100.13
+    volumes:
+      - ./data/worker3:/data
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+  worker4:
+    image: ubuntu:24.04  # Cambia l'immagine a Ubuntu 24.04
+    container_name: worker4
+    tty: true
+    networks:
+      cluster_net:
+        ipv4_address: 192.168.100.14
+    volumes:
+      - ./data/worker4:/data
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+networks:
+  cluster_net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.100.0/24  # Cambiato a una subnet non in conflitto
