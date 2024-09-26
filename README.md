@@ -2,6 +2,8 @@
 
 Questo repository contiene il codice sorgente degli esercizi sviluppati nel corso di "Distributed Programming", Università degli Studi di Salerno, DIEM, A.A 2024/2025.
 
+<br>
+
 STUDENTI DEL CORSO:
 
 Antony Storti - UNISA - a.storti2@studenti.unisa.it
