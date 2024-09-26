@@ -1,0 +1,4 @@
+Per cofigurare l'ambiente:
+
+1) Navigare dal terminale fino a raggiungere questa directory.
+2) Eseguire il comando --> "docker-compose up --build -d"
