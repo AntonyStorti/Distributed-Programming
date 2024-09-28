@@ -1,8 +1,10 @@
-# Usa Ubuntu 24.04 come immagine base
 FROM ubuntu:24.04
 
 # Aggiorna il sistema e installa Redis
 RUN apt update && apt install -y redis-server
+
+# Installa OpenJDK
+RUN apt install -y openjdk-21-jdk
 
 # Espone la porta Redis
 EXPOSE 6379
