@@ -1,75 +1,46 @@
-version: '3'
+version: '3.9'
+
 services:
-  master:
-    image: ubuntu:24.04  # Cambia l'immagine a Ubuntu 24.04
-    container_name: master_cluster
-    tty: true
+  master-cluster:
+    build: .  # Costruisce l'immagine usando il Dockerfile
+    container_name: master-cluster
+    hostname: master-cluster
     networks:
-      cluster_net:
-        ipv4_address: 192.168.100.10
-    volumes:
-      - ./data/master:/data
-    build:
-      context: .
-      dockerfile: Dockerfile
+      - redis-cluster-network
     ports:
-      - "2222:22"  # Esponi solo la porta del master per SSH
-
-  worker1:
-    image: ubuntu:24.04  # Cambia l'immagine a Ubuntu 24.04
-    container_name: worker1
-    tty: true
-    networks:
-      cluster_net:
-        ipv4_address: 192.168.100.11
+      - "6379:6379"  # Espone la porta 6379
     volumes:
-      - ./data/worker1:/data
-    build:
-      context: .
-      dockerfile: Dockerfile
+      - ./data/master:/data  # Bind mount per il master
+      - redis-master-data:/data/redis  # Volume Docker per i dati di Redis
+    restart: always
 
-  worker2:
-    image: ubuntu:24.04  # Cambia l'immagine a Ubuntu 24.04
-    container_name: worker2
-    tty: true
+  slave_1:
+    build: .  # Costruisce l'immagine usando il Dockerfile
+    container_name: slave_1
+    hostname: slave_1
     networks:
-      cluster_net:
-        ipv4_address: 192.168.100.12
+      - redis-cluster-network
     volumes:
-      - ./data/worker2:/data
-    build:
-      context: .
-      dockerfile: Dockerfile
+      - ./data/slave_1:/data  # Bind mount per slave 1
+      - redis-slave1-data:/data/redis  # Volume Docker per i dati di Redis
+    restart: always
 
-  worker3:
-    image: ubuntu:24.04  # Cambia l'immagine a Ubuntu 24.04
-    container_name: worker3
-    tty: true
+  slave_2:
+    build: .  # Costruisce l'immagine usando il Dockerfile
+    container_name: slave_2
+    hostname: slave_2
     networks:
-      cluster_net:
-        ipv4_address: 192.168.100.13
+      - redis-cluster-network
     volumes:
-      - ./data/worker3:/data
-    build:
-      context: .
-      dockerfile: Dockerfile
-
-  worker4:
-    image: ubuntu:24.04  # Cambia l'immagine a Ubuntu 24.04
-    container_name: worker4
-    tty: true
-    networks:
-      cluster_net:
-        ipv4_address: 192.168.100.14
-    volumes:
-      - ./data/worker4:/data
-    build:
-      context: .
-      dockerfile: Dockerfile
+      - ./data/slave_2:/data  # Bind mount per slave 2
+      - redis-slave2-data:/data/redis  # Volume Docker per i dati di Redis
+    restart: always
 
 networks:
-  cluster_net:
+  redis-cluster-network:
     driver: bridge
-    ipam:
-      config:
-        - subnet: 192.168.100.0/24  # Cambiato a una subnet non in conflitto
+
+volumes:
+  redis-master-data:  # Volume per il master
+  redis-slave1-data:  # Volume per slave 1
+  redis-slave2-data:  # Volume per slave 2
