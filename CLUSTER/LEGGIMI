@@ -6,3 +6,5 @@ Per cofigurare l'ambiente:
 
   "docker exec -it master-cluster redis-cli --cluster create \ master-cluster:6379 slave_1:6379 slave_2:6379 \ --cluster-replicas 0"
 
+
+
