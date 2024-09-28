@@ -3,5 +3,6 @@ Per cofigurare l'ambiente:
 1) Navigare dal terminale fino a raggiungere questa directory.
 2) Eseguire il comando --> "docker-compose up --build -d"
 3) Lanciare il comando per creare il Cluster Redis (senza repliche per essere più leggero):
+
   "docker exec -it master-cluster redis-cli --cluster create \ master-cluster:6379 slave_1:6379 slave_2:6379 \ --cluster-replicas 0"
-4) Installare una JDK su ognuna delle tre macchine server --> "sudo apt install openjdk-21-jdk"
+
