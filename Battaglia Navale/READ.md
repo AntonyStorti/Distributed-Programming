@@ -10,12 +10,11 @@ sono rappresentate dalla classe GameBoard e la classe Player rappresenta invece 
 <br><br>
 
 
-<img width="764" alt="Screenshot 2024-10-10 alle 09 06 11" src="https://github.com/user-attachments/assets/fff94ad2-2846-4b8b-80cd-d2c0dbb37bee">
+<img width="764" alt="Screenshot 2024-10-10 alle 09 06 33" src="https://github.com/user-attachments/assets/06f45a4f-61cb-45e2-a907-451bd36f8e99">
 
 
 <br><br>
 
 
-<img width="764" alt="Screenshot 2024-10-10 alle 09 06 33" src="https://github.com/user-attachments/assets/06f45a4f-61cb-45e2-a907-451bd36f8e99">
-
+<img width="764" alt="Screenshot 2024-10-10 alle 09 06 11" src="https://github.com/user-attachments/assets/fff94ad2-2846-4b8b-80cd-d2c0dbb37bee">
 
