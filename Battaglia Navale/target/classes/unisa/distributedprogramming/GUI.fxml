@@ -1,0 +1,504 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="860.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="unisa.distributedprogramming.client.ClientController">
+    <children>
+        <StackPane prefHeight="172.0" prefWidth="225.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <BorderPane fx:id="loginPane" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="860.0" prefWidth="1024.0" style="-fx-background-color: lightblue;">
+                    <top>
+                        <Label prefHeight="221.0" prefWidth="124.0" text="Login" BorderPane.alignment="CENTER">
+                            <font>
+                                <Font size="49.0" />
+                            </font></Label>
+                    </top>
+                    <center>
+                        <VBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="540.0" prefWidth="800.0" BorderPane.alignment="CENTER">
+                            <children>
+                                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+                                    <children>
+                                        <Label prefHeight="23.0" prefWidth="72.0" text="Address">
+                                            <font>
+                                                <Font size="18.0" />
+                                            </font></Label>
+                                        <TextField fx:id="addressField" prefHeight="43.0" prefWidth="219.0" promptText="127.0.0.1"/>
+                                    </children>
+                                </HBox>
+                                <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+                                    <children>
+                                        <Label prefHeight="23.0" prefWidth="74.0" text="Port">
+                                            <font>
+                                                <Font size="18.0" />
+                                            </font></Label>
+                                        <TextField fx:id="portField" prefHeight="43.0" prefWidth="219.0" promptText="12345"/>
+                                    </children>
+                                </HBox>
+                                <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+                                    <children>
+                                        <Label text="Username">
+                                            <font>
+                                                <Font size="18.0" />
+                                            </font></Label>
+                                        <TextField fx:id="usernameField" prefHeight="43.0" prefWidth="219.0" />
+                                    </children>
+                                </HBox>
+                            </children>
+                        </VBox>
+                    </center>
+                    <bottom>
+                        <Button fx:id="loginButton" mnemonicParsing="false" onAction="#connect" prefHeight="52.0" prefWidth="110.0" style="-fx-background-color: white;" text="Submit" BorderPane.alignment="CENTER">
+                            <BorderPane.margin>
+                                <Insets bottom="100.0" />
+                            </BorderPane.margin>
+                            <font>
+                                <Font size="18.0" />
+                            </font>
+                        </Button>
+                    </bottom>
+                </BorderPane>
+                <BorderPane fx:id="gamePane" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="860.0" prefWidth="1024.0" style="-fx-background-color: lightblue;" visible="false">
+                    <top>
+                        <MenuBar prefWidth="1024.0" style="-fx-background-color: lightblue;" BorderPane.alignment="CENTER">
+                            <menus>
+                                <Menu mnemonicParsing="false" text="Menu">
+                                    <items>
+                                        <MenuItem fx:id="disconnectItem" mnemonicParsing="false" onAction="#disconnect" text="Disconnect" />
+                                    </items>
+                                </Menu>
+                            </menus>
+                        </MenuBar>
+                    </top>
+                    <center>
+                        <VBox alignment="CENTER_LEFT" prefHeight="852.0" prefWidth="1024.0" spacing="10.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+                            <children>
+                                <Label fx:id="waitingLabel" text="Waiting for a player...">
+                                    <VBox.margin>
+                                        <Insets bottom="20.0" left="100.0" right="20.0" top="20.0" />
+                                    </VBox.margin></Label>
+                                <HBox fx:id="placingBox" alignment="CENTER" prefHeight="314.0" prefWidth="1024.0">
+                                    <children>
+                                        <VBox alignment="CENTER_LEFT" prefHeight="305.0" prefWidth="345.0" spacing="10.0">
+                                            <children>
+                                                <Label fx:id="selectShipLabel" text="Select ship:" />
+                                                <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                                                    <children>
+                                                        <Rectangle fx:id="ship5" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="30.0" stroke="BLACK" strokeType="INSIDE" width="154.0" />
+                                                        <RadioButton fx:id="aircraftCarrier" mnemonicParsing="false" text="AircraftCarrier">
+                                                            <toggleGroup>
+                                                                <ToggleGroup fx:id="ship" />
+                                                            </toggleGroup>
+                                                        </RadioButton>
+                                                    </children>
+                                                </HBox>
+                                                <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                                                    <children>
+                                                        <Rectangle fx:id="ship4" arcHeight="5.0" arcWidth="5.0" fill="#1ff7ff" height="30.0" stroke="BLACK" strokeType="INSIDE" width="121.0" />
+                                                        <RadioButton fx:id="battleShip" mnemonicParsing="false" text="Battleship" toggleGroup="$ship" />
+                                                    </children>
+                                                </HBox>
+                                                <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                                                    <children>
+                                                        <Rectangle fx:id="ship3bis" arcHeight="5.0" arcWidth="5.0" fill="#1fff35" height="30.0" stroke="BLACK" strokeType="INSIDE" width="91.0" />
+                                                        <RadioButton fx:id="destroyer" mnemonicParsing="false" text="Destroyer" toggleGroup="$ship" />
+                                                    </children>
+                                                </HBox>
+                                                <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                                                    <children>
+                                                        <Rectangle fx:id="ship3" arcHeight="5.0" arcWidth="5.0" fill="#ebff1f" height="30.0" stroke="BLACK" strokeType="INSIDE" width="91.0" />
+                                                        <RadioButton fx:id="submarine" mnemonicParsing="false" text="Submarine" toggleGroup="$ship" />
+                                                    </children>
+                                                </HBox>
+                                                <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                                                    <children>
+                                                        <Rectangle fx:id="ship2" arcHeight="5.0" arcWidth="5.0" fill="#ff7d1f" height="30.0" stroke="BLACK" strokeType="INSIDE" width="61.0" />
+                                                        <RadioButton fx:id="patrolBoat" mnemonicParsing="false" text="PatrolBoat" toggleGroup="$ship" />
+                                                    </children>
+                                                </HBox>
+                                            </children>
+                                            <HBox.margin>
+                                                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                            </HBox.margin>
+                                        </VBox>
+                                        <VBox prefHeight="267.0" prefWidth="247.0">
+                                            <children>
+                                                <HBox prefHeight="39.0" prefWidth="606.0" spacing="20.0">
+                                                    <children>
+                                                        <Label text="Start row">
+                                                            <HBox.margin>
+                                                                <Insets top="5.0" />
+                                                            </HBox.margin>
+                                                        </Label>
+                                                        <TextField fx:id="rowField" prefHeight="26.0" prefWidth="43.0">
+                                                            <HBox.margin>
+                                                                <Insets left="20.0" />
+                                                            </HBox.margin>
+                                                        </TextField>
+                                                    </children>
+                                                    <VBox.margin>
+                                                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                                    </VBox.margin>
+                                                </HBox>
+                                                <HBox layoutX="10.0" layoutY="10.0" prefHeight="43.0" prefWidth="516.0" spacing="20.0">
+                                                    <children>
+                                                        <Label text="Start column">
+                                                            <HBox.margin>
+                                                                <Insets top="5.0" />
+                                                            </HBox.margin>
+                                                        </Label>
+                                                        <TextField fx:id="columnField" prefHeight="26.0" prefWidth="42.0" />
+                                                    </children>
+                                                    <VBox.margin>
+                                                        <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
+                                                    </VBox.margin>
+                                                </HBox>
+                                                <HBox prefHeight="100.0" prefWidth="200.0" spacing="60.0">
+                                                    <children>
+                                                        <RadioButton fx:id="horizontal" mnemonicParsing="false" text="Horizontal" toggleGroup="$orientation">
+                                                            <toggleGroup>
+                                                                <ToggleGroup fx:id="orientation" />
+                                                            </toggleGroup>
+                                                        </RadioButton>
+                                                        <RadioButton fx:id="vertical" mnemonicParsing="false" text="Vertical" toggleGroup="$orientation" />
+                                                    </children>
+                                                    <VBox.margin>
+                                                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                                    </VBox.margin>
+                                                </HBox>
+                                                <HBox prefHeight="127.0" prefWidth="516.0">
+                                                    <children>
+                                                        <Button fx:id="placeShipButton" mnemonicParsing="false" onAction="#placeShip" prefHeight="26.0" prefWidth="106.0" style="-fx-background-color: lightblue;" text="Place ship">
+                                                            <HBox.margin>
+                                                                <Insets left="50.0" />
+                                                            </HBox.margin>
+                                                        </Button>
+                                                    </children>
+                                                    <VBox.margin>
+                                                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                                    </VBox.margin>
+                                                </HBox>
+                                            </children>
+                                            <HBox.margin>
+                                                <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
+                                            </HBox.margin>
+                                        </VBox>
+                                    </children>
+                                </HBox>
+                                <HBox alignment="CENTER" prefHeight="379.0" prefWidth="957.0" spacing="20.0">
+                                    <children>
+                                        <VBox prefHeight="352.0" prefWidth="393.0" spacing="10.0">
+                                            <children>
+                                                <Label text="you" />
+                                                <GridPane fx:id="gridUser" alignment="CENTER" gridLinesVisible="true" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="400.0" prefWidth="400.0">
+                                                    <columnConstraints>
+                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                    </columnConstraints>
+                                                    <rowConstraints>
+                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                    </rowConstraints>
+                                                    <children>
+                                                        <Label text="9" GridPane.rowIndex="1">
+                                                            <GridPane.margin>
+                                                                <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                                                            </GridPane.margin>
+                                                        </Label>
+                                                        <Label text="8" GridPane.rowIndex="2">
+                                                            <GridPane.margin>
+                                                                <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                                                            </GridPane.margin>
+                                                        </Label>
+                                                        <Label text="7" GridPane.rowIndex="3">
+                                                            <GridPane.margin>
+                                                                <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                                                            </GridPane.margin>
+                                                        </Label>
+                                                        <Label text="6" GridPane.rowIndex="4">
+                                                            <GridPane.margin>
+                                                                <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                                                            </GridPane.margin>
+                                                        </Label>
+                                                        <Label text="5" GridPane.rowIndex="5">
+                                                            <GridPane.margin>
+                                                                <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                                                            </GridPane.margin>
+                                                        </Label>
+                                                        <Label text="4" GridPane.rowIndex="6">
+                                                            <GridPane.margin>
+                                                                <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                                                            </GridPane.margin>
+                                                        </Label>
+                                                        <Label text="3" GridPane.rowIndex="7">
+                                                            <GridPane.margin>
+                                                                <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                                                            </GridPane.margin>
+                                                        </Label>
+                                                        <Label text="2" GridPane.rowIndex="8">
+                                                            <GridPane.margin>
+                                                                <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                                                            </GridPane.margin>
+                                                        </Label>
+                                                        <Label text="1" GridPane.rowIndex="9">
+                                                            <GridPane.margin>
+                                                                <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                                                            </GridPane.margin>
+                                                        </Label>
+                                                        <Label text="0" GridPane.rowIndex="10">
+                                                            <GridPane.margin>
+                                                                <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                                                            </GridPane.margin>
+                                                        </Label>
+                                                        <Label text="a" GridPane.columnIndex="1">
+                                                            <GridPane.margin>
+                                                                <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                                                            </GridPane.margin>
+                                                        </Label>
+                                                        <Label text="b" GridPane.columnIndex="2">
+                                                            <GridPane.margin>
+                                                                <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                                                            </GridPane.margin>
+                                                        </Label>
+                                                        <Label text="c" GridPane.columnIndex="3">
+                                                            <GridPane.margin>
+                                                                <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                                                            </GridPane.margin>
+                                                        </Label>
+                                                        <Label text="d" GridPane.columnIndex="4">
+                                                            <GridPane.margin>
+                                                                <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                                                            </GridPane.margin>
+                                                        </Label>
+                                                        <Label text="e" GridPane.columnIndex="5">
+                                                            <GridPane.margin>
+                                                                <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                                                            </GridPane.margin>
+                                                        </Label>
+                                                        <Label text="f" GridPane.columnIndex="6">
+                                                            <GridPane.margin>
+                                                                <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                                                            </GridPane.margin>
+                                                        </Label>
+                                                        <Label text="g" GridPane.columnIndex="7">
+                                                            <GridPane.margin>
+                                                                <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                                                            </GridPane.margin>
+                                                        </Label>
+                                                        <Label text="h" GridPane.columnIndex="8">
+                                                            <GridPane.margin>
+                                                                <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                                                            </GridPane.margin>
+                                                        </Label>
+                                                        <Label text="i" GridPane.columnIndex="9">
+                                                            <GridPane.margin>
+                                                                <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                                                            </GridPane.margin>
+                                                        </Label>
+                                                        <Label text="j" GridPane.columnIndex="10">
+                                                            <GridPane.margin>
+                                                                <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                                                            </GridPane.margin>
+                                                        </Label>
+                                                        <Label text="k" GridPane.columnIndex="11">
+                                                            <GridPane.margin>
+                                                                <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                                                            </GridPane.margin>
+                                                        </Label>
+                                                    </children>
+                                                </GridPane>
+                                            </children>
+                                        </VBox>
+                                        <VBox prefHeight="352.0" prefWidth="399.0" spacing="10.0">
+                                            <children>
+                                                <Label fx:id="userLabel" text="user" />
+                                                <GridPane fx:id="gridAdversary" alignment="CENTER" disable="true" gridLinesVisible="true" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="400.0" prefWidth="400.0">
+                                                    <columnConstraints>
+                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                    </columnConstraints>
+                                                    <rowConstraints>
+                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                    </rowConstraints>
+                                                    <children>
+                                                        <Label text="9" GridPane.rowIndex="1">
+                                                            <GridPane.margin>
+                                                                <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                                                            </GridPane.margin>
+                                                        </Label>
+                                                        <Label text="8" GridPane.rowIndex="2">
+                                                            <GridPane.margin>
+                                                                <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                                                            </GridPane.margin>
+                                                        </Label>
+                                                        <Label text="7" GridPane.rowIndex="3">
+                                                            <GridPane.margin>
+                                                                <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                                                            </GridPane.margin>
+                                                        </Label>
+                                                        <Label text="6" GridPane.rowIndex="4">
+                                                            <GridPane.margin>
+                                                                <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                                                            </GridPane.margin>
+                                                        </Label>
+                                                        <Label text="5" GridPane.rowIndex="5">
+                                                            <GridPane.margin>
+                                                                <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                                                            </GridPane.margin>
+                                                        </Label>
+                                                        <Label text="4" GridPane.rowIndex="6">
+                                                            <GridPane.margin>
+                                                                <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                                                            </GridPane.margin>
+                                                        </Label>
+                                                        <Label text="3" GridPane.rowIndex="7">
+                                                            <GridPane.margin>
+                                                                <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                                                            </GridPane.margin>
+                                                        </Label>
+                                                        <Label text="2" GridPane.rowIndex="8">
+                                                            <GridPane.margin>
+                                                                <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                                                            </GridPane.margin>
+                                                        </Label>
+                                                        <Label text="1" GridPane.rowIndex="9">
+                                                            <GridPane.margin>
+                                                                <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                                                            </GridPane.margin>
+                                                        </Label>
+                                                        <Label text="0" GridPane.rowIndex="10">
+                                                            <GridPane.margin>
+                                                                <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                                                            </GridPane.margin>
+                                                        </Label>
+                                                        <Label text="a" GridPane.columnIndex="1">
+                                                            <GridPane.margin>
+                                                                <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                                                            </GridPane.margin>
+                                                        </Label>
+                                                        <Label text="b" GridPane.columnIndex="2">
+                                                            <GridPane.margin>
+                                                                <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                                                            </GridPane.margin>
+                                                        </Label>
+                                                        <Label text="c" GridPane.columnIndex="3">
+                                                            <GridPane.margin>
+                                                                <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                                                            </GridPane.margin>
+                                                        </Label>
+                                                        <Label text="d" GridPane.columnIndex="4">
+                                                            <GridPane.margin>
+                                                                <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                                                            </GridPane.margin>
+                                                        </Label>
+                                                        <Label text="e" GridPane.columnIndex="5">
+                                                            <GridPane.margin>
+                                                                <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                                                            </GridPane.margin>
+                                                        </Label>
+                                                        <Label text="f" GridPane.columnIndex="6">
+                                                            <GridPane.margin>
+                                                                <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                                                            </GridPane.margin>
+                                                        </Label>
+                                                        <Label text="g" GridPane.columnIndex="7">
+                                                            <GridPane.margin>
+                                                                <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                                                            </GridPane.margin>
+                                                        </Label>
+                                                        <Label text="h" GridPane.columnIndex="8">
+                                                            <GridPane.margin>
+                                                                <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                                                            </GridPane.margin>
+                                                        </Label>
+                                                        <Label text="i" GridPane.columnIndex="9">
+                                                            <GridPane.margin>
+                                                                <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                                                            </GridPane.margin>
+                                                        </Label>
+                                                        <Label text="j" GridPane.columnIndex="10">
+                                                            <GridPane.margin>
+                                                                <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                                                            </GridPane.margin>
+                                                        </Label>
+                                                        <Label text="k" GridPane.columnIndex="11">
+                                                            <GridPane.margin>
+                                                                <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                                                            </GridPane.margin>
+                                                        </Label>
+                                                    </children>
+                                                </GridPane>
+                                            </children>
+                                        </VBox>
+                                    </children>
+                                    <VBox.margin>
+                                        <Insets left="20.0" right="20.0" />
+                                    </VBox.margin>
+                                </HBox>
+                            </children>
+                            <BorderPane.margin>
+                                <Insets bottom="10.0" />
+                            </BorderPane.margin>
+                        </VBox>
+                    </center>
+                </BorderPane>
+            </children>
+        </StackPane>
+    </children>
+</AnchorPane>
