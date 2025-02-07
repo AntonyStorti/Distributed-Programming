@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestione Profilo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Food Delivery</a>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <h1 class="text-center">Gestisci il tuo Profilo</h1>
+
+        <!-- Mostra messaggi di successo o errore -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="alert alert-{{ messages[0][0] }}">
+                    {{ messages[0][1] }}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <!-- Form per la modifica del profilo -->
+        <form method="POST">
+            <div class="mb-3">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" class="form-control" id="username" name="username" value="{{ user.username }}" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="name" class="form-label">Nome</label>
+                <input type="text" class="form-control" id="name" name="name" value="{{ user.name }}" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" name="email" value="{{ user.email or '' }}">
+            </div>
+
+            <div class="mb-3">
+                <label for="phone_number" class="form-label">Numero di Telefono</label>
+                <input type="text" class="form-control" id="phone_number" name="phone_number" value="{{ user.phone_number or '' }}">
+            </div>
+
+            <div class="mb-3">
+                <label for="address" class="form-label">Indirizzo</label>
+                <input type="text" class="form-control" id="address" name="address" value="{{ user.address }}" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Aggiorna Profilo</button>
+        </form>
+
+        <!-- Pulsante per il logout -->
+        <div class="text-center mt-4">
+            <a href="{{ url_for('auth.customer_dashboard') }}" class="btn btn-secondary py-2 px-5 ms-2">Torna alla Dashboard</a>
+            <form action="{{ url_for('auth.logout') }}" method="POST">
+                <button type="submit" class="btn btn-danger py-2 px-5">Logout</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

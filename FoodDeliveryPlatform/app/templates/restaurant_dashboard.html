@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard del Ristorante</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">Benvenuto {{ user.name }}!</h1>
+        <p class="text-center">Seleziona una delle seguenti opzioni per gestire il tuo ristorante:</p>
+
+        <!-- Flex container per affiancare i pulsanti principali, resi più grandi -->
+        <div class="d-flex justify-content-between gap-3">
+            <a href="{{ url_for('restaurant.view_menu', restaurant_id=user.restaurant_id) }}">
+                <button class="btn btn-primary btn-lg w-100">Gestisci il tuo menu</button>
+            </a>
+            <a href="{{ url_for('restaurant.view_orders', restaurant_id=user.restaurant_id) }}">
+                <button class="btn btn-success btn-lg w-100">Visualizza ordini</button>
+            </a>
+            <a href="{{ url_for('restaurant.view_profile', restaurant_id=user.restaurant_id) }}">
+                <button class="btn btn-info btn-lg w-100">Gestisci il tuo profilo</button>
+            </a>
+        </div>
+
+        <!-- Pulsante logout centrato -->
+        <div class="text-center mt-4">
+            <form action="{{ url_for('auth.logout') }}" method="POST">
+                <button type="submit" class="btn btn-danger btn-lg w-40">Logout</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

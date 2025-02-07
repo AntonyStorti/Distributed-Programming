@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Il Tuo Carrello</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Food Delivery</a>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+
+        <h1 class="text-center">Il Tuo Carrello</h1>
+
+        <!-- Mostra i messaggi flash -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <ul class="flashes">
+                    {% for category, message in messages %}
+                        <li class="alert alert-{{ category }}">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+
+        {% if foods_in_cart %}
+            <!-- Tabella del carrello -->
+            <form method="POST">
+                <input type="hidden" name="action" value="update_quantities">
+                <div class="table-responsive">
+                    <table class="table table-bordered mt-4">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Nome Piatto</th>
+                                <th>Descrizione</th>
+                                <th>Prezzo Unitario</th>
+                                <th>Quantità</th>
+                                <th>Prezzo Totale</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item_id in foods_in_cart %}
+                            <tr>
+                                <td>{{ food_items[item_id].name }}</td>
+                                <td>{{ food_items[item_id].description }}</td>
+                                <td>€{{ food_items[item_id].price }}</td>
+                                <td>
+                                    <input type="number" name="quantity_{{ item_id }}" value="{{ quantities[item_id] }}" min="1" class="form-control">
+                                </td>
+                                <td>€{{ food_items[item_id].price * quantities[item_id] }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="text-center mt-3">
+                    <button type="submit" class="btn btn-primary">Aggiorna Quantità</button>
+                </div>
+            </form>
+
+            <!-- Conferma Ordine -->
+            <form method="POST" class="mt-3">
+                <input type="hidden" name="action" value="complete_order">
+                <div class="text-center">
+                    <button type="submit" class="btn btn-success">Conferma Ordine</button>
+                </div>
+            </form>
+
+        {% else %}
+            <div class="alert alert-info text-center" role="alert">
+                Il tuo carrello è vuoto.
+            </div>
+        {% endif %}
+
+        <!-- Tasto per tornare al menu o sfogliare i ristoranti -->
+        <div class="text-center mt-4">
+            {% if restaurant %}
+                <a href="{{ url_for('customer.view_menu', user_id=user.id, restaurant_id=restaurant.id) }}" class="btn btn-warning">Torna al Menu</a>
+            {% else %}
+                <a href="{{ url_for('customer.browse', user_id=user.id) }}" class="btn btn-warning">Sfoglia i Ristoranti</a>
+            {% endif %}
+            <!-- Nuovo tasto per visualizzare gli ordini -->
+            <a href="{{ url_for('customer.view_orders', user_id=user.id) }}" class="btn btn-info">Visualizza Ordini</a>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

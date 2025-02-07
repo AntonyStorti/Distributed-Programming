@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rider Dashboard</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .dashboard-card {
+            transition: transform 0.3s;
+        }
+        .dashboard-card:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Dashboard del Rider</h1>
+        <div class="row g-4">
+            <!-- Card: Richieste di consegna -->
+            <div class="col-md-4">
+                <div class="card dashboard-card border-primary">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Richieste di Consegna</h5>
+                        <p class="card-text">Gestisci le richieste di consegna in sospeso.</p>
+                        <a href="/delivery/requests" class="btn btn-primary">Visualizza</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card: Percorsi Ottimali -->
+            <div class="col-md-4">
+                <div class="card dashboard-card border-success">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Percorsi Ottimali</h5>
+                        <p class="card-text">Ottieni il percorso migliore per le tue consegne.</p>
+                        <a href="/delivery/tracking" class="btn btn-success">Visualizza</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card: Stato della Consegna -->
+            <div class="col-md-4">
+                <div class="card dashboard-card border-warning">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Aggiorna Stato</h5>
+                        <p class="card-text">Aggiorna lo stato delle tue consegne.</p>
+                        <a href="/delivery/update-status" class="btn btn-warning">Aggiorna</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card: Disponibilità -->
+            <div class="col-md-4">
+                <div class="card dashboard-card border-info">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Gestisci Disponibilità</h5>
+                        <p class="card-text">Imposta il tuo stato di disponibilità.</p>
+                        <a href="/delivery/availability" class="btn btn-info">Gestisci</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card: Profilo -->
+            <div class="col-md-4">
+                <div class="card dashboard-card border-secondary">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Profilo</h5>
+                        <p class="card-text">Gestisci il tuo profilo e le impostazioni.</p>
+                        <a href="/delivery/profile" class="btn btn-secondary">Modifica</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Pulsante logout centrato -->
+        <div class="text-center mt-4">
+            <form action="{{ url_for('auth.logout') }}" method="POST">
+                <button type="submit" class="btn btn-danger btn-lg w-40">Logout</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+</body>
+</html>

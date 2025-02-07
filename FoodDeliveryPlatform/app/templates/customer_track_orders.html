@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traccia Ordini - {{ user.name }}</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Leaflet CSS per la mappa -->
+    <link href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" rel="stylesheet" />
+    <style>
+      div[id^="map-"] {
+        height: 400px; /* Altezza desiderata */
+        width: 100%; /* Larghezza desiderata */
+        border: 1px solid #ddd; /* Bordo visibile per verifica */
+      }
+    </style>
+
+</head>
+<body>
+    <div class="container mt-4">
+        <h1>Traccia i tuoi Ordini, {{ user.name }}</h1>
+
+        {% if orders|length > 0 %}
+            <div class="list-group mt-4">
+                {% for order in orders %}
+                    <div class="list-group-item" id="order-{{ order.id }}" data-lat="{{ order.restaurant.coords.lat | default(0) }}"
+                         data-lon="{{ order.restaurant.coords.lon | default(0) }}"
+                         data-current-lat="{{ order.current_latitude | default(0) }}"
+                         data-current-lon="{{ order.current_longitude | default(0) }}"
+                         data-dest-lat="{{ order.dest_coords.lat | default(0) }}"
+                         data-dest-lon="{{ order.dest_coords.lon | default(0) }}">
+                        <h5 class="mb-1">Ordine #{{ order.id }}</h5>
+                        <p class="mb-1">Status: <span class="badge bg-info">{{ order.status }}</span></p>
+                        <p class="mb-1">Data Ordine: {{ order.created_at }}</p>
+                        <p class="mb-1">Totale: €{{ order.total }}</p>
+
+                        <!-- Mappa per il tracciamento dell'ordine -->
+                        <div id="map-{{ order.id }}" style="height: 300px;"></div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="alert alert-warning" role="alert">
+                Non hai ordini tracciabili al momento.
+            </div>
+        {% endif %}
+        <div class="text-center mt-4">
+            <a href="{{ url_for('auth.customer_dashboard') }}" class="btn btn-primary">Torna alla Dashboard</a>
+            <form action="{{ url_for('auth.logout') }}" method="POST">
+                <button type="submit" class="btn btn-danger py-2 px-5">Logout</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS e dipendenze -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
+    <script type="application/json" id="orders-data">
+        {{ orders | tojson }}
+    </script>
+
+    <script>
+        console.log("Dati degli ordini:", JSON.parse(document.getElementById('orders-data').textContent));
+    </script>
+
+    <!-- Collega il file JavaScript esterno -->
+    <script src="{{ url_for('static', filename='js/customer_track_orders.js') }}"></script>
+</body>
+</html>

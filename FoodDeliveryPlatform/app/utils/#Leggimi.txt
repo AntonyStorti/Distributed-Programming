@@ -1,0 +1,8 @@
+Questa directory è un modulo Python (grazie alla presenza dell' init.py) che si occupa di contenere le funzionalità
+avanzate utilizzate negli altri moduli:
+
+    - Trigger che si occupa di gestire lo stato di apertura dei ristoranti
+    - Distanza di Haversine
+    - Geolocalizzazione degli ordini e dei luoghi
+    - Funzionalità di backend di gestione dell'MQTT: Kafka e RabbitMQ
+    - Gestione dei cookies di sessione usati per garantire le funzionalità richieste accessibili solo dopo il login.

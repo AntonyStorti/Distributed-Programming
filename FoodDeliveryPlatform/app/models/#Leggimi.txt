@@ -1,0 +1,7 @@
+Questa directory è un modulo Python (grazie alla presenza dell' init.py) che si occupa della ORM,
+crea le tabelle del DB e le mappa in oggetti python, coi relativi metodi set e get.
+
+
+N.B.
+Stiamo usando un DBMS Relazionali, ma lo rendiamo distribuito grazie al partizionamento orizzontale delle colonne:
+tale suddivisione è effettuata su base geografica dei dati presenti...

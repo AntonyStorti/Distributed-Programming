@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aggiorna Stato Consegna</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Aggiorna Stato Consegne</h1>
+        <div class="list-group">
+            {% for delivery in deliveries %}
+            <div class="list-group-item d-flex justify-content-between align-items-center">
+                <div>
+                    <h5>ID Consegna: {{ delivery.id }}</h5>
+                    <p>Ordine: {{ delivery.order_id }}</p>
+                    <p>Stato Attuale: <strong>{{ delivery.status }}</strong></p>
+                </div>
+                <div>
+                    <select class="form-select form-select-sm status-select" data-id="{{ delivery.id }}">
+                        <option value="accepted_by_rider" {% if delivery.status == 'accepted_by_rider' %}selected{% endif %}>Accettato dal Rider</option>
+                        <option value="shipped" {% if delivery.status == 'shipped' %}selected{% endif %}>In Consegna</option>
+                        <option value="completed" {% if delivery.status == 'completed' %}selected{% endif %}>Completato</option>
+                    </select>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Pulsante per il logout -->
+        <div class="text-center mt-4">
+            <a href="{{ url_for('auth.rider_dashboard') }}" class="btn btn-secondary py-2 px-5 ms-2">Torna alla Dashboard</a>
+            <form action="{{ url_for('auth.logout') }}" method="POST">
+                <button type="submit" class="btn btn-danger py-2 px-5">Logout</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Include the external JavaScript file -->
+    <script src="{{ url_for('static', filename='js/rider_update_status.js') }}"></script>
+</body>
+</html>

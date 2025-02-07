@@ -1,0 +1,6 @@
+Questa directory è un modulo Python (grazie alla presenza dell' init.py) che si occupa di implementare le routes
+di connessione alle funzionalità di API RESTFul del server Flask, inoltre, vi è l'uso di richieste AJAX.
+
+Qui vi è anche l'uso di MQTT per la gestione delle funzionalità: RabbitMQ e Kafka
+
+Qui vi è anche l'uso di Nominatim di OpenStreetMap usata tramite API per gestire gli aspetti di geolocalizzazione.

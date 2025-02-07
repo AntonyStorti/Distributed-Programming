@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aggiorna Disponibilità</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Aggiorna Disponibilità</h1>
+
+        <form id="availability-form" class="needs-validation" novalidate>
+            <!-- Sezione per la disponibilità -->
+            <div class="d-flex justify-content-center mb-3">
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="isAvailable" name="is_available"
+                        {% if availability and availability.is_available %}checked{% endif %}>
+                    <label class="form-check-label" for="isAvailable">Disponibile</label>
+                </div>
+            </div>
+
+            <!-- Sezione per l'orario di inizio -->
+            <div class="d-flex justify-content-center mb-3">
+                <div class="text-center">
+                    <label for="startTime" class="form-label">Orario di inizio</label>
+                    <div class="d-flex justify-content-center gap-2">
+                        <select class="form-select w-auto" id="startHour" name="start_hour" style="width: 70px;">
+                            {% for hour in range(0, 24) %}
+                                <option value="{{ hour }}"
+                                    {% if availability and availability.start_time and availability.start_time.hour == hour %}selected{% endif %}>
+                                    {{ "%02d"|format(hour) }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                        <select class="form-select w-auto" id="startMinute" name="start_minute" style="width: 70px;">
+                            {% for minute in range(0, 60) %}
+                                <option value="{{ minute }}"
+                                    {% if availability and availability.start_time and availability.start_time.minute == minute %}selected{% endif %}>
+                                    {{ "%02d"|format(minute) }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sezione per l'orario di fine -->
+            <div class="d-flex justify-content-center mb-3">
+                <div class="text-center">
+                    <label for="endTime" class="form-label">Orario di fine</label>
+                    <div class="d-flex justify-content-center gap-2">
+                        <select class="form-select w-auto" id="endHour" name="end_hour" style="width: 70px;">
+                            {% for hour in range(0, 24) %}
+                                <option value="{{ hour }}"
+                                    {% if availability and availability.end_time and availability.end_time.hour == hour %}selected{% endif %}>
+                                    {{ "%02d"|format(hour) }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                        <select class="form-select w-auto" id="endMinute" name="end_minute" style="width: 70px;">
+                            {% for minute in range(0, 60) %}
+                                <option value="{{ minute }}"
+                                    {% if availability and availability.end_time and availability.end_time.minute == minute %}selected{% endif %}>
+                                    {{ "%02d"|format(minute) }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pulsante per inviare il form -->
+            <div class="text-center mb-3">
+                <button type="submit" class="btn btn-primary">Salva</button>
+            </div>
+        </form>
+
+        <!-- Pulsante per il logout -->
+        <div class="text-center mt-4">
+            <a href="{{ url_for('auth.rider_dashboard') }}" class="btn btn-secondary py-2 px-5 ms-2">Torna alla Dashboard</a>
+            <form action="{{ url_for('auth.logout') }}" method="POST">
+                <button type="submit" class="btn btn-danger py-2 px-5">Logout</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Include the external JavaScript file -->
+    <script src="{{ url_for('static', filename='js/rider_update_availability.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dettagli Ordine</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+    <div class="container mt-5">
+        <h1 class="text-center">Dettagli Ordine #{{ order.id }}</h1>
+
+        <div class="bg-white p-4 rounded shadow-sm">
+            <p><strong>Cliente:</strong> {{ order.customer_id }}</p>
+            <p><strong>Data Ordine:</strong> {{ order.order_date }}</p>
+            <p><strong>Stato:</strong> {{ order.status }}</p>
+
+            <h3>Articoli Ordinati:</h3>
+            <ul class="list-group mb-3">
+                {% for order_item in order.order_items %}
+                    <li class="list-group-item">
+                        {{ order_item.item.name }} - Quantità: {{ order_item.quantity }} - Prezzo: {{ order_item.item.price }}€
+                    </li>
+                {% endfor %}
+            </ul>
+
+            <p><strong>Totale:</strong> {{ order.total }}€</p>
+
+            <!-- Modifica stato -->
+            <form action="{{ url_for('restaurant.view_order_details', order_id=order.id) }}" method="POST" class="mt-4">
+                <div class="mb-3">
+                    <label for="status" class="form-label">Modifica Stato:</label>
+                    <select name="status" id="status" class="form-select">
+                        <option value="pending" {% if order.status == 'pending' %}selected{% endif %}>Pending</option>
+                        <option value="in_preparation" {% if order.status == 'in_preparation' %}selected{% endif %}>In Preparazione</option>
+                        <option value="ready_for_pickup" {% if order.status == 'ready_for_pickup' %}selected{% endif %}>Pronto per il Ritiro</option>
+                        <option value="shipped" {% if order.status == 'shipped' %}selected{% endif %}>In consegna</option>
+                        <option value="completed" {% if order.status == 'completed' %}selected{% endif %}>Completato</option>
+                        <option value="cancelled" {% if order.status == 'cancelled' %}selected{% endif %}>Annullato</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Aggiorna Stato</button>
+            </form>
+
+            <div class="mt-4">
+                <a href="{{ url_for('restaurant.view_orders', restaurant_id=order.restaurant_id) }}" class="btn btn-secondary">Torna alla lista ordini</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
